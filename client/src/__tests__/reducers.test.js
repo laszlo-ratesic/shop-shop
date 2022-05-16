@@ -6,7 +6,7 @@ import {
 } from "../utils/actions";
 
 // import reducer
-import { reducer } from '../utils/reducers';
+import { reducer } from "../utils/reducers";
 
 // create a sample of what our global state will look like
 const initialState = {
@@ -15,13 +15,22 @@ const initialState = {
   currentCategory: "1",
 };
 
+test("UPDATE_PRODUCTS", () => {
+  let newState = reducer(initialState, {
+    type: UPDATE_PRODUCTS,
+    products: [{}, {}],
+  });
 
-test('UPDATE_PRODUCTS', () => {
-    let newState = reducer(initialState, {
-        type: UPDATE_PRODUCTS,
-        products: [{}, {}]
-    });
+  expect(newState.products.length).toBe(2);
+  expect(initialState.products.length).toBe(0);
+});
 
-    expect(newState.products.length).toBe(2);
-    expect(initialState.products.length).toBe(0);
-})
+test("UPDATE_CATEGORIES", () => {
+  let newState = reducer(initialState, {
+    type: UPDATE_CATEGORIES,
+    categories: [{}, {}],
+  });
+
+  expect(newState.categories.length).toBe(2);
+  expect(initialState.categories.length).toBe(1);
+});
